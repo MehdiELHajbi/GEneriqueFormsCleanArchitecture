@@ -1,0 +1,14 @@
+﻿using Application.Features.Common.Models;
+using System.Collections.Generic;
+
+namespace Application.Features.DataBases.Queries.GetListDataBesesWithPagination
+{
+    public class ListDataBasesWithPaginationVM : PaginatedList<ListDataBasesDTO>
+    {
+        public ListDataBasesWithPaginationVM(List<ListDataBasesDTO> items, int count, int pageIndex, int pageSize)
+            : base(items, count, pageIndex, pageSize)
+        {
+
+        }
+    }
+}
