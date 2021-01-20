@@ -12,7 +12,7 @@ namespace Application.Common.Exceptions
             : base("One or more validation failures have occurred.")
         {
             ValidationError = new Dictionary<string, string[]>();
-            //reponseKO = new ReponseKO();
+            reponseKO = new ReponseKO();
         }
 
         public ValidationException(IEnumerable<ValidationFailure> failures)
