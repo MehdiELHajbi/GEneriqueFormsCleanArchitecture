@@ -19,7 +19,7 @@ namespace Application.Features.DataBases.Commands.Create
         }
         public async Task<CreateDataBesesCommandResponse> Handle(CreateDataBesesCommand request, CancellationToken cancellationToken)
         {
-
+            //throw new Exception("test");
             // Validattion request With ValidatinBehaviour => automatique
 
             // init data to save

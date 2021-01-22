@@ -62,7 +62,13 @@ namespace WebAPI.Middleware
 
             if (result == string.Empty)
             {
-                result = JsonConvert.SerializeObject(new { error = exception.Message });
+                var msg = "";
+                if (exception.InnerException != null)
+                    msg = exception.InnerException.Message;
+
+                msg = JsonConvert.SerializeObject(new { error = exception.Message }) + " InnerException " + msg;
+
+                result = msg;
             }
 
             return context.Response.WriteAsync(result);

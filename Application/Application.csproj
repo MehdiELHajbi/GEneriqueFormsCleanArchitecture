@@ -5,10 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Common\Mappings\MappingProfileV1.cs.old" />
     <None Remove="Features\DataBases\Queries\GetListDataBesesWithPagination\ListDataBasesWithPaginationVM.cs.old" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Common\Mappings\MappingProfileV1.cs.old" />
     <Compile Include="Features\DataBases\Queries\GetListDataBesesWithPagination\ListDataBasesWithPaginationVM.cs.old" />
   </ItemGroup>
 
@@ -24,10 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Responses\Query\" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,7 @@
-﻿using Application.Features.DataBases.Commands.Create;
-using Application.Features.DataBases.Queries;
-using Application.Features.DataBases.Queries.ExportGetListDataBeses;
-using AutoMapper;
-using Domain.Entites;
+﻿using AutoMapper;
+using System;
+using System.Linq;
+using System.Reflection;
 
 namespace Application.Common.Mappings
 {
@@ -10,15 +9,26 @@ namespace Application.Common.Mappings
     {
         public MappingProfile()
         {
-            // Query
-            CreateMap<DataBase, ListDataBasesVM>().ReverseMap();
-            CreateMap<DataBase, DataBaseFileRecordDto>().ReverseMap();
-            CreateMap<DataBase, ListDataBasesDTO>().ReverseMap();
+            ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+        }
 
-            // Command
-            CreateMap<DataBase, CreateDataBesesCommand>().ReverseMap();
-            CreateMap<DataBase, CreateDataBaseDto>().ReverseMap();
+        private void ApplyMappingsFromAssembly(Assembly assembly)
+        {
+            var types = assembly.GetExportedTypes()
+                .Where(t => t.GetInterfaces().Any(i =>
+                    i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
+                .ToList();
 
+            foreach (var type in types)
+            {
+                var instance = Activator.CreateInstance(type);
+
+                var methodInfo = type.GetMethod("Mapping")
+                    ?? type.GetInterface("IMapFrom`1").GetMethod("Mapping");
+
+                methodInfo?.Invoke(instance, new object[] { this });
+
+            }
         }
     }
 }

@@ -1,6 +1,9 @@
-﻿namespace Application.Features.DataBases.Commands.Create
+﻿using Application.Common.Mappings;
+using Domain.Entites;
+
+namespace Application.Features.DataBases.Commands.Create
 {
-    public class CreateDataBaseDto
+    public class CreateDataBaseDto : IMapFrom<DataBase>
     {
         public int idDataBase { get; set; }
         public string NameDataBase { get; set; }

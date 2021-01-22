@@ -25,6 +25,8 @@ namespace Application.Common.Response
 
         public bool Success { get; }
         public string Message { get; set; }
+        public string LinkRedirection { get; set; }
+        public string LinkToResolveException { get; set; }
         public List<IDictionary<string, string[]>> ListeError { get; set; }
     }
 }
