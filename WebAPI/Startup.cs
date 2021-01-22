@@ -5,16 +5,23 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Persistence;
+using Serilog;
 using WebAPI.Middleware;
 
 namespace WebAPI
 {
     public class Startup
     {
+        private void addLog(IConfiguration configuration)
+        {
+            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+        }
         public Startup(IConfiguration configuration)
         {
+            addLog(configuration);
             Configuration = configuration;
         }
 
@@ -65,7 +72,7 @@ namespace WebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory log)
         {
             if (env.IsDevelopment())
             {
@@ -78,9 +85,11 @@ namespace WebAPI
             }
 
             app.UseHttpsRedirection();
-
+            log.AddSerilog();
 
             app.UseCustomExceptionHandler();
+
+
 
             app.UseRouting();
 

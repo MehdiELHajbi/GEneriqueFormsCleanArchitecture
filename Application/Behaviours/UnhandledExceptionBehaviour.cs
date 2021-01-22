@@ -1,17 +1,17 @@
-﻿using MediatR;
+﻿using Application.Contracts.Infrastructure;
+using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-
 namespace Application.Behaviours
 {
     public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
-        //private readonly ILogger<TRequest> _logger;
+        private readonly IFLog<TRequest> _logger;
 
-        public UnhandledExceptionBehaviour()//ILogger<TRequest> logger)
+        public UnhandledExceptionBehaviour(IFLog<TRequest> logger)
         {
-            //_logger = logger;
+            _logger = logger;
         }
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
@@ -25,6 +25,7 @@ namespace Application.Behaviours
                 var requestName = typeof(TRequest).Name;
 
                 //_logger.LogError(ex, "CleanArchitecture Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
+                _logger.Write(ex, "CleanArchitecture Request: Unhandled Exception for Request " + requestName + " --- " + request);
 
                 throw;
             }

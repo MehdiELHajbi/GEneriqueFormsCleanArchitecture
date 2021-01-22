@@ -12,6 +12,7 @@ namespace infra
             //services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
 
             services.AddTransient<ICsvExporter, CsvExporter>();
+            services.AddTransient(typeof(IFLog<>), typeof(FLog<>));
             //services.AddTransient<IEmailService, EmailService>();
 
             return services;

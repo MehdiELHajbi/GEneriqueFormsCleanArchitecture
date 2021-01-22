@@ -18,6 +18,7 @@ namespace Application.Common.Exceptions
         public ValidationException(IEnumerable<ValidationFailure> failures)
             : this()
         {
+
             ValidationError = failures
                 .GroupBy(e => e.PropertyName, e => e.ErrorMessage)
                 .ToDictionary(failureGroup => failureGroup.Key, failureGroup => failureGroup.ToArray());
