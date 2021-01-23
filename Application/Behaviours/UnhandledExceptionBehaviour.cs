@@ -1,5 +1,7 @@
-﻿using Application.Contracts.Infrastructure;
+﻿using Application.Common.Exceptions;
+using Application.Contracts.Infrastructure;
 using MediatR;
+using Newtonsoft.Json;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,14 +24,31 @@ namespace Application.Behaviours
             }
             catch (Exception ex)
             {
+
                 var requestName = typeof(TRequest).Name;
 
                 //_logger.LogError(ex, "CleanArchitecture Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
-                _logger.Write(ex, "CleanArchitecture Request: Unhandled Exception for Request " + requestName + " --- " + request);
 
+                _logger.WriteError(ex, "CleanArchitecture - RequestName:  " + requestName + " -Request :  " + request);
+                _logger.WriteError(ex, ConvertException(ex));
                 throw;
             }
         }
+        private string ConvertException(Exception exception)
+        {
+            switch (exception)
+            {
+                case ValidationException validationException:
+                    return JsonConvert.SerializeObject(validationException.reponseKO);
+                case Exception ex:
+                    break;
+
+
+            }
+
+            return "";
+        }
     }
+
 
 }

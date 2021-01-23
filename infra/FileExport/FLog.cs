@@ -12,10 +12,12 @@ namespace infra.FileExport
         {
             _logger = logger;
         }
-        public void Write(Exception ex, string msg)
+        public void WriteError(Exception ex, string msg)
         {
             _logger.LogError(ex, msg);
 
+
+            //_logger.LogError(ex, "CleanArchitecture Request: Unhandled Exception for Request {Name} {@Request}", "xxxxxxx", "xxxxxxxxxx");
             //_logger.LogError("CleanArchitecture Request: Unhandled Exception for Request {Name} {@Request}");
         }
     }

@@ -4,6 +4,6 @@ namespace Application.Contracts.Infrastructure
 {
     public interface IFLog<T>
     {
-        void Write(Exception ex, string msg);
+        void WriteError(Exception ex, string msg);
     }
 }
