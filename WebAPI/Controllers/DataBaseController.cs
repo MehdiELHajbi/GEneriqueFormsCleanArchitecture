@@ -52,7 +52,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpPut(Name = "UpdateEvent")]
+        [HttpPut(Name = "UpdatDataBase")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[ProducesDefaultResponseType]

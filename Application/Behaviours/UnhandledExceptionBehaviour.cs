@@ -40,6 +40,9 @@ namespace Application.Behaviours
             {
                 case ValidationException validationException:
                     return JsonConvert.SerializeObject(validationException.reponseKO);
+                case NotFoundException notFoundException:
+                    return JsonConvert.SerializeObject(notFoundException.reponseKO);
+
                 case Exception ex:
                     break;
 
