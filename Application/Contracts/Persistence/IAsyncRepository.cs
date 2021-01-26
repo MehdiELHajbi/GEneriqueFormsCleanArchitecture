@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Contracts
 {
+    //https://blog.dcube.fr/index.php/2019/09/05/generic-repository-unit-of-work-et-entity-framework/
     public interface IAsyncRepository<T> where T : class
     {
         #region CREATE
@@ -21,7 +22,7 @@ namespace Application.Contracts
                                   );
         IEnumerable<T> GetMuliple(
                                    Expression<Func<T, bool>> predicate = null,
-                                   Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null
+                                   Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                                    bool disableTracking = true
                                   );
 

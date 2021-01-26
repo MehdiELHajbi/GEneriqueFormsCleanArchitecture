@@ -37,7 +37,7 @@ namespace Persistence.Repositories
         }
         public virtual IEnumerable<T> GetMuliple(
                                                Expression<Func<T, bool>> predicate = null,
-                                               Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null
+                                               Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                                                bool disableTracking = true
                                             )
         {

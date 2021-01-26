@@ -29,7 +29,7 @@ namespace Application.Behaviours
 
                 //_logger.LogError(ex, "CleanArchitecture Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
 
-                _logger.WriteError(ex, "CleanArchitecture - RequestName:  " + requestName + " -Request :  " + request);
+                //_logger.WriteError(ex, "CleanArchitecture - RequestName:  " + requestName + " -Request :  " + request);
                 _logger.WriteError(ex, ConvertException(ex));
                 throw;
             }
