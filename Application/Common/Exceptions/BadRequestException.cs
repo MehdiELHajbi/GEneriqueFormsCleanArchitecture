@@ -1,16 +1,10 @@
-﻿using Application.Common.Response;
-using System;
-
-namespace Application.Common.Exceptions
+﻿namespace Application.Common.Exceptions
 {
-    public class BadRequestException : ApplicationException
+    public class BadRequestException : BaseException
     {
-        public BadRequestException(string message) : base(message)
-        {
-            reponseKO = new ReponseKO();
-            reponseKO.Message = message;
-        }
+        public BadRequestException(string message) : base(message) { }
 
-        public ReponseKO reponseKO { get; }
+
+
     }
 }

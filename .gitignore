@@ -338,3 +338,4 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/Application/Features/Common/Pattern/Rule/Strategy.cs

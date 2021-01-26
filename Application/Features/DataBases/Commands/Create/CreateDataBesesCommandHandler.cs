@@ -1,6 +1,6 @@
 ﻿using Application.Contracts;
+using Application.Features.DataBases.Commands.Create.Steps;
 using AutoMapper;
-using Domain.Entites;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,27 +19,42 @@ namespace Application.Features.DataBases.Commands.Create
         }
         public async Task<CreateDataBesesCommandResponse> Handle(CreateDataBesesCommand request, CancellationToken cancellationToken)
         {
-            //throw new Exception("test");
-            // Validattion request With ValidatinBehaviour => automatique
 
-            // init data to save
-            var dataBase = new DataBase()
-            {
-                ConnetionName = request.ConnetionName,
-                NameDataBase = request.NameDataBase,
-                TypeDataBase = request.TypeDataBase
-            };
+            var build = new CreateDatabaseObjectStep(request, _dataBaseRepository);
+            var result = await build.Execute(null);
 
-            // save data in data Base
-            dataBase = await _dataBaseRepository.AddAsync(dataBase);
 
-            // create response
-            var CreateDataBesesCommandResponse = new CreateDataBesesCommandResponse();
-            CreateDataBesesCommandResponse.IdDataBase = dataBase.IdDataBase;
-            CreateDataBesesCommandResponse.Message = "Create ok for id " + dataBase.IdDataBase;
 
-            // Return Response
-            return CreateDataBesesCommandResponse;
+            return result.ReponseObjectToApi;
         }
+
+        // Version 1 Handel
+        //public async Task<CreateDataBesesCommandResponse> Handle(CreateDataBesesCommand request, CancellationToken cancellationToken)
+        //{
+
+
+
+        //    // Validattion request With ValidatinBehaviour => automatique
+
+        //    // init data to save
+        //    var dataBase = new DataBase()
+        //    {
+        //        ConnetionName = request.ConnetionName,
+        //        NameDataBase = request.NameDataBase,
+        //        TypeDataBase = request.TypeDataBase
+        //    };
+
+        //    // save data in data Base
+        //    dataBase = await _dataBaseRepository.AddAsync(dataBase);
+
+        //    // create response
+        //    var CreateDataBesesCommandResponse = new CreateDataBesesCommandResponse();
+        //    CreateDataBesesCommandResponse.IdDataBase = dataBase.IdDataBase;
+        //    CreateDataBesesCommandResponse.Message = "Create ok for id " + dataBase.IdDataBase;
+
+        //    // Return Response
+        //    return CreateDataBesesCommandResponse;
+        //}
+
     }
 }

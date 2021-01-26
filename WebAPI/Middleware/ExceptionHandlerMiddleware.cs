@@ -53,6 +53,10 @@ namespace WebAPI.Middleware
                     httpStatusCode = HttpStatusCode.NotFound;
                     result = JsonConvert.SerializeObject(notFoundException.reponseKO);
                     break;
+                case AlreadyExists alreadyExists:
+                    httpStatusCode = HttpStatusCode.BadRequest;
+                    result = JsonConvert.SerializeObject(alreadyExists.reponseKO);
+                    break;
                 case Exception ex:
                     httpStatusCode = HttpStatusCode.BadRequest;
                     break;
