@@ -7,11 +7,11 @@ using System.Threading;
 using System.Threading.Tasks;
 namespace Application.Behaviours
 {
-    public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public class LogExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
         private readonly IFLog<TRequest> _logger;
 
-        public UnhandledExceptionBehaviour(IFLog<TRequest> logger)
+        public LogExceptionBehaviour(IFLog<TRequest> logger)
         {
             _logger = logger;
         }
@@ -30,27 +30,28 @@ namespace Application.Behaviours
                 //_logger.LogError(ex, "CleanArchitecture Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
 
                 //_logger.WriteError(ex, "CleanArchitecture - RequestName:  " + requestName + " -Request :  " + request);
-                _logger.WriteError(ex, ConvertException(ex));
+                //_logger.WriteError(ex, ConvertException(ex));
+                _logger.WriteError(ex, JsonConvert.SerializeObject(((BaseException)ex).reponseKO));
                 throw;
             }
         }
-        private string ConvertException(Exception exception)
-        {
-            switch (exception)
-            {
-                case ValidationException validationException:
-                    return JsonConvert.SerializeObject(validationException.reponseKO);
-                case NotFoundException notFoundException:
-                    return JsonConvert.SerializeObject(notFoundException.reponseKO);
+        //private string ConvertException(Exception exception)
+        //{
+        //    switch (exception)
+        //    {
+        //        case ValidationException validationException:
+        //            return JsonConvert.SerializeObject(validationException.reponseKO);
+        //        case NotFoundException notFoundException:
+        //            return JsonConvert.SerializeObject(notFoundException.reponseKO);
 
-                case Exception ex:
-                    break;
+        //        case Exception ex:
+        //            break;
 
 
-            }
+        //    }
 
-            return "";
-        }
+        //    return "";
+        //}
     }
 
 

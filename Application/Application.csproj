@@ -5,11 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Common\Exceptions\AlreadyEexistsException.cdds" />
+    <None Remove="Common\Exceptions\ValidationException.cssds" />
     <None Remove="Common\Mappings\MappingProfileV1.cs.old" />
     <None Remove="Features\DataBases\Queries\GetListDataBesesWithPagination\ListDataBasesWithPaginationVM.cs.old" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Common\Exceptions\AlreadyEexistsException.cdds" />
+    <Compile Include="Common\Exceptions\ValidationException.cssds" />
     <Compile Include="Common\Mappings\MappingProfileV1.cs.old" />
     <Compile Include="Features\DataBases\Queries\GetListDataBesesWithPagination\ListDataBasesWithPaginationVM.cs.old" />
   </ItemGroup>
@@ -21,6 +25,7 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.3.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="OneOf" Version="3.0.163" />
     <!--<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />-->
 
     <!--<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />-->

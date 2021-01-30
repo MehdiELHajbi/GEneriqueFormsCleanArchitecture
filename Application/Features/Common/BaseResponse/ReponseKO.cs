@@ -1,32 +1,34 @@
-﻿using System.Collections.Generic;
-
-namespace Application.Common.Response
+﻿namespace Application.Features.Common.BaseResponse
 {
     public class ReponseKO
     {
         public ReponseKO()
         {
             Success = false;
-            ListeError = new List<IDictionary<string, string[]>>();
+            DetailsErrors = new object();
         }
         public ReponseKO(string message = null)
         {
             Success = false;
             Message = message;
-            ListeError = new List<IDictionary<string, string[]>>();
+            DetailsErrors = new object();
         }
 
-        public ReponseKO(string message, bool success)
+
+        public ReponseKO(string message, object errors)
         {
-            Success = success;
+            Success = false;
             Message = message;
-            ListeError = new List<IDictionary<string, string[]>>();
+            DetailsErrors = errors;
         }
 
         public bool Success { get; }
         public string Message { get; set; }
         public string LinkRedirection { get; set; }
         public string LinkToResolveException { get; set; }
-        public List<IDictionary<string, string[]>> ListeError { get; set; }
+        public object DetailsErrors { get; }
+
     }
+
+
 }

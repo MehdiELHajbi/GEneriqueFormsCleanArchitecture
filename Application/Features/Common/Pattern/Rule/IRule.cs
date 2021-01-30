@@ -11,8 +11,8 @@ namespace Application.Features.Common.Pattern.Rule
 
         IEnumerable<IRule<T>> steps { get; set; }
 
-        //string ruleName { get; set; }
-        //string RuleDescrition { get; }
+        string ruleName { get; }
+        string RuleDescrition { get; }
         //string RuleExcptOutPut { get; }
     }
 

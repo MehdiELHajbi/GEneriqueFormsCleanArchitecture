@@ -1,7 +1,9 @@
 ﻿using Application.Contracts;
+using Application.Features.DataBases.Commands.Create.Responses;
 using Application.Features.DataBases.Commands.Create.Steps;
 using AutoMapper;
 using MediatR;
+using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,9 +21,11 @@ namespace Application.Features.DataBases.Commands.Create
         }
         public async Task<CreateDataBesesCommandResponse> Handle(CreateDataBesesCommand request, CancellationToken cancellationToken)
         {
-
-            var build = new CreateDatabaseObjectStep(request, _dataBaseRepository);
-            var result = await build.Execute(null);
+            var ctx = new Context();
+            var build = new CreateDatabaseObjectStep(ctx, request, _dataBaseRepository);
+            var json = JsonConvert.SerializeObject(build);
+            //var exception = (Exception)build.OneOf[2];
+            var result = await build.Execute(ctx);
 
 
 

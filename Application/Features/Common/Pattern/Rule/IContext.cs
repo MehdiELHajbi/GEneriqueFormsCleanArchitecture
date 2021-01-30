@@ -4,6 +4,7 @@
     {
 
         bool Continue { get; set; }
+        object errors { get; set; }
 
     }
 

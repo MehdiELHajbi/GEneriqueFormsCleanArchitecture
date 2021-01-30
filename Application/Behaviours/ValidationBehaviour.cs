@@ -1,10 +1,10 @@
-﻿using FluentValidation;
+﻿using Application.Features.DataBases.Commands.Create.Responses.KO;
+using FluentValidation;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ValidationException = Application.Common.Exceptions.ValidationException;
 namespace Application.Behaviours
 {
     public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
@@ -28,11 +28,23 @@ namespace Application.Behaviours
                 var validationResults = await Task.WhenAll(_validators.Select(v => v.ValidateAsync(context, cancellationToken)));
                 var failures = validationResults.SelectMany(r => r.Errors).Where(f => f != null).ToList();
 
+                var ValidationError = failures
+                    .GroupBy(e => e.PropertyName, e => e.ErrorMessage)
+                    .ToDictionary(failureGroup => failureGroup.Key, failureGroup => failureGroup.ToArray());
 
                 if (failures.Count != 0)
-                    throw new ValidationException(failures);
+                    ExceptionValidationExtension(ValidationError);
             }
             return await next();
+        }
+
+        private void ExceptionValidationExtension(object ValidationError)
+        {
+            IDictionary<string, object> objectError = new Dictionary<string, object>();
+
+            objectError.Add("ValidationException", ValidationError);
+
+            throw new ExceptionValidationResponse(objectError);
         }
     }
 

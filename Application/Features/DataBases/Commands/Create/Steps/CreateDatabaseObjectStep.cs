@@ -10,24 +10,25 @@ namespace Application.Features.DataBases.Commands.Create.Steps
         private readonly CreateDataBesesCommand request;
         private readonly IDataBaseRepository _dataBaseRepository;
         public IEnumerable<IRule<Context>> steps { get; set; }
-        public string ruleName { get; set; }
 
-        public string RuleDescrition { get; } = "";
+        //public List<dynamic> OneOf = new List<dynamic>() { new ValidationException(), new CreateDataBesesCommandResponse(), new AlreadyExists("", null), new NotFoundException("ddddf", "dd") };
+        public string RuleDescrition { get; } = " CreateDatabaseObjectStep permet de creer une ligne dans la table 'DataBase' ";
 
         public string RuleExcptOutPut { get; } = "";
 
-        public Context ctx;
+        string IRule<Context>.ruleName => nameof(CreateDatabaseObjectStep);
 
-        public CreateDatabaseObjectStep(CreateDataBesesCommand request, IDataBaseRepository dataBaseRepository)
+        private Context ctx;
+
+        public CreateDatabaseObjectStep(Context ctx, CreateDataBesesCommand request, IDataBaseRepository dataBaseRepository)
         {
             this.request = request;
             this._dataBaseRepository = dataBaseRepository;
-            this.ctx = new Context();
+            this.ctx = ctx;
             this.steps = new List<IRule<Context>>
                                          {
-                                                new DatabaseExisteStep(request.NameDataBase,dataBaseRepository),
-                                                new SaveDatabaseStep(request,dataBaseRepository),
-                                                new ReturnResponseStep()
+                                                new IfDatabaseExisteStep(request.NameDataBase,dataBaseRepository),
+                                                new ElseDatabaseNotExisteStep(request,dataBaseRepository)
                                          };
         }
 

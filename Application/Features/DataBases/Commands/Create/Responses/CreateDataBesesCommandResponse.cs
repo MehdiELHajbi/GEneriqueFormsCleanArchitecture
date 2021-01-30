@@ -1,6 +1,6 @@
-﻿using Application.Common.Response;
+﻿using Application.Features.Common.BaseResponse;
 
-namespace Application.Features.DataBases.Commands.Create
+namespace Application.Features.DataBases.Commands.Create.Responses
 {
     public class CreateDataBesesCommandResponse : ReponseOK
     {

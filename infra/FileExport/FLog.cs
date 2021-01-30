@@ -24,5 +24,10 @@ namespace infra.FileExport
             //_logger.LogError(ex, "CleanArchitecture Request: Unhandled Exception for Request {Name} {@Request}", "xxxxxxx", "xxxxxxxxxx");
             //_logger.LogError("CleanArchitecture Request: Unhandled Exception for Request {Name} {@Request}");
         }
+
+        public void WriteInformation(string msg)
+        {
+            _logger.LogInformation(msg);
+        }
     }
 }

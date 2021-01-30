@@ -1,4 +1,5 @@
-﻿using Application.Common.Response;
+﻿
+using Application.Features.Common.BaseResponse;
 using System;
 
 namespace Application.Common.Exceptions
@@ -7,10 +8,14 @@ namespace Application.Common.Exceptions
     {
         public BaseException(string message) : base(message)
         {
-            reponseKO = new ReponseKO();
-            reponseKO.Message = message;
+            reponseKO = new ReponseKO(message);
+        }
+        public BaseException(string message, object errors) : base(message)
+        {
+            reponseKO = new ReponseKO(message, errors);
         }
 
         public ReponseKO reponseKO { get; }
+
     }
 }

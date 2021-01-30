@@ -13,11 +13,11 @@ namespace Application.Common.Mappings
             // Query
             CreateMap<DataBase, ListDataBasesVM>().ReverseMap();
             CreateMap<DataBase, DataBaseFileRecordDto>().ReverseMap();
-            CreateMap<DataBase, ListDataBasesDTO>().ReverseMap();
+            //CreateMap<DataBase, ListDataBasesDTO>().ReverseMap();
 
             // Command
             CreateMap<DataBase, CreateDataBesesCommand>().ReverseMap();
-            CreateMap<DataBase, CreateDataBaseDto>().ReverseMap();
+            //CreateMap<DataBase, CreateDataBaseDto>().ReverseMap();
 
         }
     }

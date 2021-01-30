@@ -36,6 +36,7 @@ namespace Application.Features.DataBases.Commands.Update
             entity.NameDataBase = request.NameDataBase;
             entity.TypeDataBase = request.TypeDataBase;
 
+
             // Update data and Save
             await _dataBaseRepository.UpdateAsync(entity);
 

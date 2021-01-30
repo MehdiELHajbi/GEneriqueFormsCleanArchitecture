@@ -1,4 +1,4 @@
-﻿namespace Application.Common.Response
+﻿namespace Application.Features.Common.BaseResponse
 {
     public class ReponseOK
     {

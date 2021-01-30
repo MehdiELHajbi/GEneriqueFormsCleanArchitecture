@@ -1,0 +1,27 @@
+﻿namespace Application.Common.Exceptions
+{
+    public class ValidationException : BaseException
+    {
+        public ValidationException(object errors)
+            : base("One or more validation failures have occurred.", errors)
+        {
+            //ValidationError = new Dictionary<string, string[]>();
+        }
+
+
+        //public ValidationException(IEnumerable<ValidationFailure> failures)
+        //    : this()
+        //{
+
+        //    ValidationError = failures
+        //        .GroupBy(e => e.PropertyName, e => e.ErrorMessage)
+        //        .ToDictionary(failureGroup => failureGroup.Key, failureGroup => failureGroup.ToArray());
+
+        //    //this.reponseKO.ListeError.Add(ValidationError);
+        //    //this.reponseKO.Message = "One or more validation failures have occurred.";
+        //}
+
+        //public IDictionary<string, string[]> ValidationError { get; }
+
+    }
+}
