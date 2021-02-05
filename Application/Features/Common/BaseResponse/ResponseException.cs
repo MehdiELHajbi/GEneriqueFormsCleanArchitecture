@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Application.Features.DataBases.Commands.Create.ExceptionHandling
+namespace Application.Features.Common.BaseResponse
 {
     //public class OneOfResponse<T>
     //{
@@ -50,55 +50,58 @@ namespace Application.Features.DataBases.Commands.Create.ExceptionHandling
 
 
 
-    public class OneOfResponseExceptionCreate : Exception
+    public class ResponseException : Exception
     {
         public object ResponseApiObject { get; set; }
-        public bool succes { get; set; }
-        public enum ExceptionType
-        {
-            ExceptionDataBaseAlreadyExists
-           , ExceptionValidation
-        }
+        //public bool succes { get; set; }
+        //public enum ExceptionType
+        //{
+        //    ExceptionDataBaseAlreadyExists
+        //   , ExceptionValidation
+        //}
 
-        public enum SuceesType
-        {
-            CreateDataBesesCommand
-        }
+        //public enum SuceesType
+        //{
+        //    CreateDataBesesCommand
+        //}
 
-        public readonly object Type;
-        public OneOfResponseExceptionCreate(ExceptionType Type, string message, object value)
+        //public readonly object Type;
+        //public OneOfResponseException(ExceptionType Type, string message, object value)
+        public ResponseException(string message, object value)
            : base(message)
         {
-            this.Type = Type;
+            //this.Type = Type;
             this.ResponseApiObject = value;
-            this.succes = false;
+            //this.succes = false;
         }
-        public OneOfResponseExceptionCreate(SuceesType Type, object value)
+        //public OneOfResponseException(SuceesType Type, object value)
 
-        {
-            this.Type = Type;
-            this.ResponseApiObject = value;
-            this.succes = true;
+        //{
+        //    this.Type = Type;
+        //    this.ResponseApiObject = value;
+        //    this.succes = true;
 
-        }
+        //}
     }
 
     public class ExceptionCustom
     {
-        public readonly string message;
-        public ExceptionCustom(OneOfResponseExceptionCreate.ExceptionType Type, object result)
+        //public readonly string message;
+        //public ExceptionCustom(OneOfResponseException.ExceptionType Type, object result)
+        public ExceptionCustom(string msg, object result)
         {
-            throw new OneOfResponseExceptionCreate(Type, "valeur existe deja", result);
+            throw new ResponseException(msg, result);
+            //throw new OneOfResponseException(Type, "valeur existe deja", result);
 
             //ExecuteException(Type, OneOfCreateDataBaseResponse);
         }
 
-        public ExceptionCustom(OneOfResponseExceptionCreate.SuceesType Type, object result)
-        {
-            throw new OneOfResponseExceptionCreate(Type, result);
+        //public ExceptionCustom(OneOfResponseException.SuceesType Type, object result)
+        //{
+        //    throw new OneOfResponseException(Type, result);
 
-            //ExecuteException(Type, OneOfCreateDataBaseResponse);
-        }
+        //    //ExecuteException(Type, OneOfCreateDataBaseResponse);
+        //}
         //public void ExecuteException(CustomException.ExceptionType Type, object OneOfCreateDataBaseResponse)
         //{
         //    switch (Type)

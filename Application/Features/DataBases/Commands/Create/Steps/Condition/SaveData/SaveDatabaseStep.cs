@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Application.Features.DataBases.Commands.Create.Steps
 {
-    public class SaveDatabaseStep : IRule<Context>
+    public class SaveDatabaseStep : ISquenceRule<Context>
     {
-        private int idDataBase;
+        //private int idDataBase;
         private readonly CreateDataBesesCommand request;
         private readonly IDataBaseRepository dataBaseRepository;
         public IEnumerable<IRule<Context>> steps { get; set; }
         public string RuleDescrition { get; } = " DatabaseNotExisteStep permet permet d'enregistrer une dans la table  'DataBase' passer en parmetre existe deja dans la Bd";
+
+        int IdDataBase;
 
         string IRule<Context>.ruleName => nameof(SaveDatabaseStep);
 
@@ -20,7 +22,7 @@ namespace Application.Features.DataBases.Commands.Create.Steps
         {
             this.request = request;
             this.dataBaseRepository = dataBaseRepository;
-            this.idDataBase = 0;
+            //this.idDataBase = 0;
 
 
             InitSteps();
@@ -31,18 +33,26 @@ namespace Application.Features.DataBases.Commands.Create.Steps
         {
             this.steps = new List<IRule<Context>>
                                          {
-                                                new ReturnResponseStep(this.idDataBase)
+                                                new ReturnResponseStep()
                                          };
         }
+
+
+        ///-------------------------*---------*-------------------------------
+        ///-----------*-------------* Programm*  ---------------*--------------
+        ///-------------------------*-------- *----------------------------------
+
         public async Task<Context> Execute(Context ctx)
         {
             // Create Object To save
             var dataBase = CreateObject();
+
             // save data in data Base 
             dataBase = await SaveDataInDataBase(dataBase);
 
             // update context with reult
-            UpdateContext(ctx, dataBase);
+            UpdateContext(ctx, dataBase.IdDataBase);
+
             // Do Steps
             return await ExecuteSteps(this.steps, ctx);
         }
@@ -62,10 +72,11 @@ namespace Application.Features.DataBases.Commands.Create.Steps
             // Create Object To save
             return await this.dataBaseRepository.AddAsync(dataBase);
         }
-        public void UpdateContext(Context ctx, DataBase dataBase)
+        public void UpdateContext(Context ctx, int IdDataBase)
         {
-            ctx.DataBase_id = dataBase.IdDataBase;
-            this.idDataBase = ctx.DataBase_id;
+            ctx.DataBaseStepResult.DataBase_id = IdDataBase;
+
+            //this.idDataBase = ctx.DataBase_id;
         }
 
         public async Task<Context> ExecuteSteps(IEnumerable<IRule<Context>> steps, Context ctx)
@@ -82,6 +93,7 @@ namespace Application.Features.DataBases.Commands.Create.Steps
             }
             return ctx;
         }
+
 
     }
 }

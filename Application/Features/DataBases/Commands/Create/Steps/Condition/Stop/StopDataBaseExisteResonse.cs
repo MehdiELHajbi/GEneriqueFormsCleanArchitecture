@@ -1,4 +1,5 @@
-﻿using Application.Features.Common.Pattern.Rule;
+﻿using Application.Features.Common.BaseResponse;
+using Application.Features.Common.Pattern.Rule;
 using Application.Features.DataBases.Commands.Create.Responses.KO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -26,9 +27,13 @@ namespace Application.Features.DataBases.Commands.Create.Steps
 
         public void ThrowException(Context ctx)
         {
-            ctx.ResponseAbstract = new ExceptionDataBaseAlreadyExistsResponse(this.nameDatabse);
+            // utilisé cet option  pour retourner une reponse sans exception
+            //ctx.ResponseAbstract = new ExceptionDataBaseAlreadyExistsResponse(this.nameDatabse);
+            //ctx.Continue = false;
 
-            ctx.Continue = false;
+
+            new ExceptionCustom("StopDataBaseExisteResonse ", new ExceptionDataBaseAlreadyExistsResponse(this.nameDatabse));
+
         }
     }
 }

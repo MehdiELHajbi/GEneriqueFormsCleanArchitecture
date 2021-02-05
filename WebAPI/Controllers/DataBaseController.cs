@@ -1,6 +1,6 @@
 ﻿using Application.Features.Common.Models;
 using Application.Features.DataBases.Commands.Create;
-using Application.Features.DataBases.Commands.Create.Responses;
+using Application.Features.DataBases.Commands.Create.Responses.DocumentationAPI;
 using Application.Features.DataBases.Commands.Create.Responses.KO;
 using Application.Features.DataBases.Commands.Update;
 using Application.Features.DataBases.Queries;

@@ -12,10 +12,10 @@ namespace Application.Common.Exceptions
         //}
         public BaseException(string message, T errors) : base(message)
         {
-            reponseKO = new ReponseKO<T>(message, errors);
+            reponseKO = new KoObject<T>(message, errors);
         }
 
-        public ReponseKO<T> reponseKO { get; }
+        public KoObject<T> reponseKO { get; }
 
     }
 }

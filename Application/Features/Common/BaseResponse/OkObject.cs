@@ -1,14 +1,13 @@
-﻿using Application.Features.DataBases.Commands.Create.ExceptionHandling;
-
+﻿
 namespace Application.Features.Common.BaseResponse
 {
-    public class ReponseOK : ResponseAbstract
+    public class OkObject : ResponseAbstract
     {
-        public ReponseOK()
+        public OkObject()
         {
             Success = true;
         }
-        public ReponseOK(string message = null)
+        public OkObject(string message = null)
         {
             Success = true;
             Message = message;

@@ -2,7 +2,7 @@
 
 namespace Application.Features.DataBases.Commands.Update
 {
-    public class UpdateDataBesesCommandResponse : ReponseOK
+    public class UpdateDataBesesCommandResponse : OkObject
     {
     }
 }

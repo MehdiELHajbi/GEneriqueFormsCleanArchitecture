@@ -1,9 +1,5 @@
 ﻿using Application.Contracts.Infrastructure;
-using Application.Features.DataBases.Commands.Create.Responses;
-using Application.Features.DataBases.Commands.Create.Responses.KO;
 using MediatR;
-using Newtonsoft.Json;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 namespace Application.Behaviours
@@ -21,15 +17,15 @@ namespace Application.Behaviours
         {
             var response = await next();
 
-            if (response is OneOfCreateDataBaseResponse OneOfResponse)
-            {
-                if (OneOfResponse.ExceptionDataBaseAlreadyExistsResponse != null)
-                    throw new Exception("Exception on " + JsonConvert.SerializeObject(OneOfResponse.ExceptionDataBaseAlreadyExistsResponse));
-            }
-            if (response is ExceptionValidationResponse ExceptionValidationResponse)
-            {
-                throw new Exception("Exception on " + JsonConvert.SerializeObject(ExceptionValidationResponse));
-            }
+            //if (response is OneOfCreateDataBaseResponse OneOfResponse)
+            //{
+            //    if (OneOfResponse.ExceptionDataBaseAlreadyExistsResponse != null)
+            //        throw new Exception("Exception on " + JsonConvert.SerializeObject(OneOfResponse.ExceptionDataBaseAlreadyExistsResponse));
+            //}
+            //if (response is ExceptionValidationResponse ExceptionValidationResponse)
+            //{
+            //    throw new Exception("Exception on " + JsonConvert.SerializeObject(ExceptionValidationResponse));
+            //}
             return response;
         }
     }

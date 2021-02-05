@@ -2,7 +2,7 @@
 
 namespace Application.Features.DataBases.Commands.Create.Responses.KO
 {
-    public class ExceptionDataBaseAlreadyExistsResponse : ReponseKO<AlreadyExistsDetailError>
+    public class ExceptionDataBaseAlreadyExistsResponse : KoObject<AlreadyExistsDetailError>
     {
 
         //public AlreadyExistsDetailError alreadyExistsDetailError { get; set; }
@@ -12,6 +12,7 @@ namespace Application.Features.DataBases.Commands.Create.Responses.KO
 
         : base(msgAlreadyExists, AddObjectErrors(nameDataBase))
         {
+
         }
 
         public static AlreadyExistsDetailError AddObjectErrors(string nameDataBase)
@@ -29,7 +30,6 @@ namespace Application.Features.DataBases.Commands.Create.Responses.KO
 
     public class AlreadyExistsDetailError
     {
-        public int test { get; set; }
         public AlreadyExist AlreadyExistException { get; set; }
         public AlreadyExistsDetailError()
         {

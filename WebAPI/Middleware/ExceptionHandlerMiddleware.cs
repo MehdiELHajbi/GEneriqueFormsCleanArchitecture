@@ -1,4 +1,4 @@
-﻿using Application.Features.DataBases.Commands.Create.ExceptionHandling;
+﻿using Application.Features.Common.BaseResponse;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -64,15 +64,15 @@ namespace WebAPI.Middleware
                 //    httpStatusCode = HttpStatusCode.BadRequest;
                 //    result = JsonConvert.SerializeObject(baseException.reponseKO);
                 //    break;
-                case OneOfResponseExceptionCreate OneOfResponseExceptionCreate:
+                case ResponseException ResponseException:
 
                     httpStatusCode = HttpStatusCode.BadRequest;
 
-                    if (OneOfResponseExceptionCreate.succes)
-                        httpStatusCode = HttpStatusCode.OK;
+                    //if (responseAbstractKO..succes)
+                    //    httpStatusCode = HttpStatusCode.OK;
 
 
-                    result = JsonConvert.SerializeObject(OneOfResponseExceptionCreate.ResponseApiObject);
+                    result = JsonConvert.SerializeObject(ResponseException.ResponseApiObject);
                     break;
                 case Exception ex:
                     httpStatusCode = HttpStatusCode.BadRequest;

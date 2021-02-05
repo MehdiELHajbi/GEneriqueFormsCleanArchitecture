@@ -2,7 +2,7 @@
 
 namespace Application.Features.DataBases.Commands.Create.Responses.OK
 {
-    public class CreateDataBesesCommandResponse : ReponseOK
+    public class CreateDataBesesCommandResponse : OkObject
     {
         public CreateDataBesesCommandResponse(int dataBaseID, string msg) : base(msg)
         {

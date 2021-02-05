@@ -1,5 +1,5 @@
 ﻿using Application.Contracts.Infrastructure;
-using Application.Features.DataBases.Commands.Create.ExceptionHandling;
+using Application.Features.Common.BaseResponse;
 using MediatR;
 using Newtonsoft.Json;
 using System;
@@ -22,16 +22,30 @@ namespace Application.Behaviours
             {
                 return await next();
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
 
-                var requestName = typeof(TRequest).Name;
+                //var requestName = typeof(TRequest).Name;
 
                 //_logger.LogError(ex, "CleanArchitecture Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
 
                 //_logger.WriteError(ex, "CleanArchitecture - RequestName:  " + requestName + " -Request :  " + request);
                 //_logger.WriteError(ex, ConvertException(ex));
-                _logger.WriteError(ex, JsonConvert.SerializeObject(((OneOfResponseExceptionCreate)ex).ResponseApiObject));
+                //_logger.WriteError(ex, JsonConvert.SerializeObject(((ResponseException)ex).ResponseApiObject));
+
+
+                switch (exception)
+                {
+                    case ResponseException ResponseException:
+
+                        _logger.WriteError(exception, JsonConvert.SerializeObject(ResponseException.ResponseApiObject));
+
+                        break;
+                    case Exception ex:
+                        _logger.WriteError(ex, JsonConvert.SerializeObject(ex));
+
+                        break;
+                }
                 throw;
             }
         }
