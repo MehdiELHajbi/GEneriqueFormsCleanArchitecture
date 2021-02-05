@@ -21,6 +21,7 @@ namespace Application
 
             //services.AddTransient<IValidator<UpdateDataBesesCommand>, UpdateDataBesesCommandValidator>();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LogExceptionBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ThrowExceptionBehaviour<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));

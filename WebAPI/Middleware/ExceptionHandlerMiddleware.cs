@@ -1,4 +1,4 @@
-﻿using Application.Common.Exceptions;
+﻿using Application.Features.DataBases.Commands.Create.ExceptionHandling;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Middleware
 {
+    //https://stackoverflow.com/questions/12519561/throw-httpresponseexception-or-return-request-createerrorresponse
+
+
     public class ExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
@@ -57,9 +60,19 @@ namespace WebAPI.Middleware
                 //    httpStatusCode = HttpStatusCode.BadRequest;
                 //    result = JsonConvert.SerializeObject(alreadyExists.reponseKO);
                 //    break;
-                case BaseException baseException:
+                //case BaseException baseException:
+                //    httpStatusCode = HttpStatusCode.BadRequest;
+                //    result = JsonConvert.SerializeObject(baseException.reponseKO);
+                //    break;
+                case OneOfResponseExceptionCreate OneOfResponseExceptionCreate:
+
                     httpStatusCode = HttpStatusCode.BadRequest;
-                    result = JsonConvert.SerializeObject(baseException.reponseKO);
+
+                    if (OneOfResponseExceptionCreate.succes)
+                        httpStatusCode = HttpStatusCode.OK;
+
+
+                    result = JsonConvert.SerializeObject(OneOfResponseExceptionCreate.ResponseApiObject);
                     break;
                 case Exception ex:
                     httpStatusCode = HttpStatusCode.BadRequest;

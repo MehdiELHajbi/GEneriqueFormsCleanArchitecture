@@ -1,9 +1,10 @@
 ﻿using Application.Contracts;
 using Application.Features.Common.Pattern.Rule;
+using Application.Features.DataBases.Commands.Create.Steps;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Application.Features.DataBases.Commands.Create.Steps
+namespace Application.Features.DataBases.Commands.Create.Step
 {
     public class CreateDatabaseObjectStep : IRule<Context>
     {
@@ -26,29 +27,16 @@ namespace Application.Features.DataBases.Commands.Create.Steps
             this.request = request;
             this._dataBaseRepository = dataBaseRepository;
             this.ctx = ctx;
-            //this.steps = new List<IRule<Context>>
-            //                             {
-            //                                    new IfDatabaseExisteStep(request.NameDataBase,dataBaseRepository),
-            //                                    new ElseDatabaseNotExisteStep(request,dataBaseRepository)
-            //                             };
-
-            //this.steps = new List<IRule<Context>>
-            //{
-            //    ConditionRule<IRule<Context>>.Condition(true,new IfDatabaseExisteStep(request.NameDataBase,dataBaseRepository),
-            //                                                    new ElseDatabaseNotExisteStep(request,dataBaseRepository)
-            //                                                    ),
-            //     new ElseDatabaseNotExisteStep(request,dataBaseRepository)
-            //};
-
             this.steps = new List<IRule<Context>>
-                                         {
-                                                new ConditionDataBaseExiste(request,dataBaseRepository)
-                                         };
-
+            {
+                ConditionRule<IRule<Context>>.Condition(false,(IRule<Context>) new IfDatabaseExisteStep(request.NameDataBase,dataBaseRepository),
+                                                                (IRule<Context>) new ElseDatabaseNotExisteStep(request,dataBaseRepository)
+                                                                ),
+                (IRule<Context>)  new ElseDatabaseNotExisteStep(request,dataBaseRepository)
+            };
 
 
         }
-
 
 
         public async Task<Context> Execute(Context ctx)

@@ -1,5 +1,5 @@
 ﻿using Application.Contracts;
-using Application.Features.DataBases.Commands.Create.Responses;
+using Application.Features.DataBases.Commands.Create.ExceptionHandling;
 using Application.Features.DataBases.Commands.Create.Steps;
 using AutoMapper;
 using MediatR;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.DataBases.Commands.Create
 {
-    public class CreateDataBesesCommandHandler : IRequestHandler<CreateDataBesesCommand, CreateDataBesesCommandResponse>
+    public class CreateDataBesesCommandHandler : IRequestHandler<CreateDataBesesCommand, ResponseAbstract>
     {
         private readonly IDataBaseRepository _dataBaseRepository;
         private readonly IMapper _mapper;
@@ -19,17 +19,18 @@ namespace Application.Features.DataBases.Commands.Create
             _mapper = mapper;
             _dataBaseRepository = dataBaseRepository;
         }
-        public async Task<CreateDataBesesCommandResponse> Handle(CreateDataBesesCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseAbstract> Handle(CreateDataBesesCommand request, CancellationToken cancellationToken)
         {
+
             var ctx = new Context();
             var build = new CreateDatabaseObjectStep(ctx, request, _dataBaseRepository);
             var json = JsonConvert.SerializeObject(build);
             //var exception = (Exception)build.OneOf[2];
-            var result = await build.Execute(ctx);
+            ctx = await build.Execute(ctx);
 
+            //ctx.result = result.GetResult(ctx);
 
-
-            return result.ReponseObjectToApi;
+            return ctx.ResponseAbstract;
         }
 
         // Version 1 Handel

@@ -1,6 +1,8 @@
-﻿namespace Application.Features.Common.BaseResponse
+﻿using Application.Features.DataBases.Commands.Create.ExceptionHandling;
+
+namespace Application.Features.Common.BaseResponse
 {
-    public class ReponseOK
+    public class ReponseOK : ResponseAbstract
     {
         public ReponseOK()
         {

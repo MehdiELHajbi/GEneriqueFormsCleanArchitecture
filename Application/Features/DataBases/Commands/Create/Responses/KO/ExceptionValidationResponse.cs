@@ -1,10 +1,11 @@
-﻿using Application.Common.Exceptions;
+﻿using Application.Features.Common.BaseResponse;
+using System.Collections.Generic;
 
 namespace Application.Features.DataBases.Commands.Create.Responses.KO
 {
-    public class ExceptionValidationResponse : BaseException
+    public class ExceptionValidationResponse : ReponseKO<Dictionary<string, string[]>>
     {
-        public ExceptionValidationResponse(object errors)
+        public ExceptionValidationResponse(Dictionary<string, string[]> errors)
             : base("One or more validation failures have occurred.", errors)
         {
             //ValidationError = new Dictionary<string, string[]>();

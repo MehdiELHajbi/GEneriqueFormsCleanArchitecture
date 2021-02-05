@@ -1,4 +1,5 @@
-﻿using Application.Features.DataBases.Commands.Create.Responses.KO;
+﻿using Application.Features.DataBases.Commands.Create.ExceptionHandling;
+using Application.Features.DataBases.Commands.Create.Responses.KO;
 using FluentValidation;
 using MediatR;
 using System.Collections.Generic;
@@ -33,7 +34,17 @@ namespace Application.Behaviours
                     .ToDictionary(failureGroup => failureGroup.Key, failureGroup => failureGroup.ToArray());
 
                 if (failures.Count != 0)
-                    ExceptionValidationExtension(ValidationError);
+                    //cancellationToken = new CancellationToken(false);
+                    //ExceptionValidationExtension(ValidationError);
+                    new ExceptionCustom(
+                                         OneOfResponseExceptionCreate.ExceptionType.ExceptionValidation
+                                        , new ExceptionValidationResponse(ValidationError)
+                                       );
+
+
+
+                //var ExceptionValidationResponse = new ExceptionValidationResponse(ValidationError);
+                //return Task.FromResult<TResponse>(ExceptionValidationResponse);
             }
             return await next();
         }
@@ -44,7 +55,7 @@ namespace Application.Behaviours
 
             objectError.Add("ValidationException", ValidationError);
 
-            throw new ExceptionValidationResponse(objectError);
+            //throw new new ExceptionValidationResponse(objectError);
         }
     }
 

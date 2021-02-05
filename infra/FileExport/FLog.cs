@@ -16,7 +16,7 @@ namespace infra.FileExport
         public void WriteError(Exception ex, string msg)
         {
             _logger.LogInformation("------------------------");
-            _logger.LogError(ex, msg);
+            _logger.LogError(ex.StackTrace, msg);
             _logger.LogInformation("------------------------");
             _logger.LogError(ex.Demystify(), msg);
 

@@ -1,22 +1,22 @@
-﻿using Application.Common.Exceptions;
+﻿using Application.Features.Common.BaseResponse;
 
 namespace Application.Features.DataBases.Commands.Create.Responses.KO
 {
-    public class ExceptionDataBaseAlreadyExistsResponse : BaseException
+    public class ExceptionDataBaseAlreadyExistsResponse : ReponseKO<AlreadyExistsDetailError>
     {
 
-
+        //public AlreadyExistsDetailError alreadyExistsDetailError { get; set; }
         private static string msgAlreadyExists => "Name of Databse  is Already Exists";
 
-        public ExceptionDataBaseAlreadyExistsResponse(object nameDataBase)
-         : base(msgAlreadyExists, AddObjectErrors(nameDataBase))
-        {
+        public ExceptionDataBaseAlreadyExistsResponse(string nameDataBase)
 
+        : base(msgAlreadyExists, AddObjectErrors(nameDataBase))
+        {
         }
 
-        public static object AddObjectErrors(object nameDataBase)
+        public static AlreadyExistsDetailError AddObjectErrors(string nameDataBase)
         {
-            AlreadyExistsDetailError errors = new AlreadyExistsDetailError();
+            var errors = new AlreadyExistsDetailError();
             errors.AlreadyExistException.Field = nameof(nameDataBase);
             errors.AlreadyExistException.Value = nameDataBase;
             errors.AlreadyExistException.Detail = nameDataBase + " ne peut etre en double dans la BD";
@@ -29,6 +29,7 @@ namespace Application.Features.DataBases.Commands.Create.Responses.KO
 
     public class AlreadyExistsDetailError
     {
+        public int test { get; set; }
         public AlreadyExist AlreadyExistException { get; set; }
         public AlreadyExistsDetailError()
         {
@@ -38,7 +39,7 @@ namespace Application.Features.DataBases.Commands.Create.Responses.KO
     public class AlreadyExist
     {
         public string Field { get; set; }
-        public object Value { get; set; }
+        public string Value { get; set; }
         public string Detail { get; set; }
         public string Type { get; set; }
 

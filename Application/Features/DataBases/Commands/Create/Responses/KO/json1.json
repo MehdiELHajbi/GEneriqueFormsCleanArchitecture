@@ -1,0 +1,52 @@
+﻿{
+  "steps": [
+    {
+      "ExceptionDataBaseAlreadyExistsResponse": {
+        "reponseKO": {
+          "Success": false,
+          "Message": "Name of Databse  is Already Exists",
+          "LinkRedirection": null,
+          "LinkToResolveException": null,
+          "DetailsErrors": {
+            "AlreadyExistException": {
+              "Field": "nameDataBase",
+              "Value": "string",
+              "Detail": "string ne peut etre en double dans la BD",
+              "Type": "String"
+            }
+          }
+        },
+        "StackTrace": null,
+        "Message": "Name of Databse  is Already Exists",
+        "Data": {},
+        "InnerException": null,
+        "HelpLink": null,
+        "Source": null,
+        "HResult": -2146232832
+      },
+      "RuleDescrition": " DatabaseExisteStep permet si le nom de la  'DataBase' passer en parmetre existe deja dans la Bd",
+      "steps": null
+    },
+    {
+      "RuleDescrition": " DatabaseNotExisteStep permet de lancer le next steps",
+      "steps": [
+        {
+          "steps": [
+            {
+              "CreateDataBesesCommandResponse": {
+                "IdDataBase": 0,
+                "Success": true,
+                "Message": null
+              },
+              "RuleDescrition": " ReturnResponseStep de retourner la reponse",
+              "steps": null
+            }
+          ],
+          "RuleDescrition": " DatabaseNotExisteStep permet permet d'enregistrer une dans la table  'DataBase' passer en parmetre existe deja dans la Bd"
+        }
+      ]
+    }
+  ],
+  "RuleDescrition": " CreateDatabaseObjectStep permet de creer une ligne dans la table 'DataBase' ",
+  "RuleExcptOutPut": ""
+}

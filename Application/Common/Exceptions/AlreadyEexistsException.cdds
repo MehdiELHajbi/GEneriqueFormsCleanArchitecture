@@ -1,9 +1,9 @@
 ﻿namespace Application.Common.Exceptions
 {
-    public class AlreadyEexistsException : BaseException
+    public class AlreadyEexistsException //: BaseException
     {
         private static string msgAlreadyExists => " is Already Exists";
-        public AlreadyEexistsException(string message, object errors) : base(createMsg(message), errors)
+        public AlreadyEexistsException(string message, object errors) //: base(createMsg(message), errors)
         {
         }
 

@@ -8,6 +8,7 @@ namespace Application.Features.DataBases.Commands.Create.Steps
 {
     public class SaveDatabaseStep : IRule<Context>
     {
+        private int idDataBase;
         private readonly CreateDataBesesCommand request;
         private readonly IDataBaseRepository dataBaseRepository;
         public IEnumerable<IRule<Context>> steps { get; set; }
@@ -19,31 +20,57 @@ namespace Application.Features.DataBases.Commands.Create.Steps
         {
             this.request = request;
             this.dataBaseRepository = dataBaseRepository;
-            this.steps = new List<IRule<Context>>
-                                         {
-                                                new ReturnResponseStep()
-                                         };
+            this.idDataBase = 0;
+
+
+            InitSteps();
 
         }
 
+        private void InitSteps()
+        {
+            this.steps = new List<IRule<Context>>
+                                         {
+                                                new ReturnResponseStep(this.idDataBase)
+                                         };
+        }
         public async Task<Context> Execute(Context ctx)
         {
             // Create Object To save
-            var dataBase = new DataBase()
+            var dataBase = CreateObject();
+            // save data in data Base 
+            dataBase = await SaveDataInDataBase(dataBase);
+
+            // update context with reult
+            UpdateContext(ctx, dataBase);
+            // Do Steps
+            return await ExecuteSteps(this.steps, ctx);
+        }
+
+        public DataBase CreateObject()
+        {
+            // Create Object To save
+            return new DataBase()
             {
                 ConnetionName = this.request.ConnetionName,
                 NameDataBase = this.request.NameDataBase,
                 TypeDataBase = this.request.TypeDataBase
             };
-            // save data in data Base
-            dataBase = await this.dataBaseRepository.AddAsync(dataBase);
-
-            // update context with reult
+        }
+        public async Task<DataBase> SaveDataInDataBase(DataBase dataBase)
+        {
+            // Create Object To save
+            return await this.dataBaseRepository.AddAsync(dataBase);
+        }
+        public void UpdateContext(Context ctx, DataBase dataBase)
+        {
             ctx.DataBase_id = dataBase.IdDataBase;
+            this.idDataBase = ctx.DataBase_id;
+        }
 
-
-            // Do Steps
-            foreach (var step in this.steps)
+        public async Task<Context> ExecuteSteps(IEnumerable<IRule<Context>> steps, Context ctx)
+        {
+            foreach (var step in steps)
             {
                 if (ctx.Continue) // Ne pas faire tout les Steps
                 {
@@ -55,5 +82,6 @@ namespace Application.Features.DataBases.Commands.Create.Steps
             }
             return ctx;
         }
+
     }
 }

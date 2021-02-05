@@ -1,9 +1,9 @@
 ﻿namespace Application.Common.Exceptions
 {
-    public class ValidationException : BaseException
+    public class ValidationException //: BaseException
     {
         public ValidationException(object errors)
-            : base("One or more validation failures have occurred.", errors)
+            //: base("One or more validation failures have occurred.", errors)
         {
             //ValidationError = new Dictionary<string, string[]>();
         }

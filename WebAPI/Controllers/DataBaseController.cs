@@ -1,6 +1,7 @@
 ﻿using Application.Features.Common.Models;
 using Application.Features.DataBases.Commands.Create;
 using Application.Features.DataBases.Commands.Create.Responses;
+using Application.Features.DataBases.Commands.Create.Responses.KO;
 using Application.Features.DataBases.Commands.Update;
 using Application.Features.DataBases.Queries;
 using Application.Features.DataBases.Queries.ExportGetListDataBeses;
@@ -46,16 +47,25 @@ namespace WebAPI.Controllers
 
 
         [HttpPost(Name = "AddDataBase")]
-        public async Task<ActionResult<CreateDataBesesCommandResponse>> Create([FromBody] CreateDataBesesCommand createCategoryCommand)
+        //[ProducesResponseType(typeof(ExceptionValidationResponse), 400)]
+        //[ProducesResponseType(typeof(ExceptionDataBaseAlreadyExistsResponse), 400)]
+
+        //[ProducesResponseType(typeof(ReponseKO), 400)]
+        //[SwaggerResponse(System.Net.HttpStatusCode.NotFound, Type = typeof(string))]
+
+        public async Task<ActionResult<OneOfCreateDataBaseResponse>> Create([FromBody] CreateDataBesesCommand createCategoryCommand)
         {
+
             var response = await Mediator.Send(createCategoryCommand);
             return Ok(response);
         }
 
 
         [HttpPut(Name = "UpdatDataBase")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ExceptionValidationResponse), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ExceptionDataBaseAlreadyExistsResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(UpdateDataBesesCommandResponse), StatusCodes.Status200OK)]
+
         //[ProducesDefaultResponseType]
         public async Task<ActionResult<UpdateDataBesesCommandResponse>> Update([FromBody] UpdateDataBesesCommand updateEventCommand)
         {
@@ -65,3 +75,7 @@ namespace WebAPI.Controllers
 
     }
 }
+
+
+// get attribute value to genrate test , number of result
+//https://blog.dangl.me/archive/different-response-schemas-in-aspnet-core-swagger-api-definition-with-nswag/

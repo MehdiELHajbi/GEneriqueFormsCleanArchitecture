@@ -1,5 +1,5 @@
-﻿using Application.Common.Exceptions;
-using Application.Contracts.Infrastructure;
+﻿using Application.Contracts.Infrastructure;
+using Application.Features.DataBases.Commands.Create.ExceptionHandling;
 using MediatR;
 using Newtonsoft.Json;
 using System;
@@ -31,7 +31,7 @@ namespace Application.Behaviours
 
                 //_logger.WriteError(ex, "CleanArchitecture - RequestName:  " + requestName + " -Request :  " + request);
                 //_logger.WriteError(ex, ConvertException(ex));
-                _logger.WriteError(ex, JsonConvert.SerializeObject(((BaseException)ex).reponseKO));
+                _logger.WriteError(ex, JsonConvert.SerializeObject(((OneOfResponseExceptionCreate)ex).ResponseApiObject));
                 throw;
             }
         }

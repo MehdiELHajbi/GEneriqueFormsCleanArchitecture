@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Application.Features.Common.Pattern.Rule
 {
@@ -9,7 +8,7 @@ namespace Application.Features.Common.Pattern.Rule
 
 
 
-        IEnumerable<IRule<T>> steps { get; set; }
+
 
         string ruleName { get; }
         string RuleDescrition { get; }

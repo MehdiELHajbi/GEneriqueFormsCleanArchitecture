@@ -38,27 +38,27 @@ namespace Application.Features.Common.Pattern.Rule
                 .Concat(source);
         }
 
-        public static string GetChaine(this IRule<IContext> strategy)
-        {
-            var c = "";
-            foreach (var st in strategy.steps)
-            {
-                if (st.steps == null)
-                {
-                    c = c + "-->" + st.ruleName;
-                    //if (st.StrategieError != "")
-                    //    return c;
-                }
+        //public static string GetChaine(this IRule<IContext> strategy)
+        //{
+        //    var c = "";
+        //    foreach (var st in strategy.steps)
+        //    {
+        //        if (st.steps == null)
+        //        {
+        //            c = c + "-->" + st.ruleName;
+        //            //if (st.StrategieError != "")
+        //            //    return c;
+        //        }
 
-                else
-                {
-                    c = c + "; (" + st.ruleName + ")";
-                    c = c + st.GetChaine();
+        //        else
+        //        {
+        //            c = c + "; (" + st.ruleName + ")";
+        //            c = c + st.GetChaine();
 
-                }
-            }
-            return c;
-        }
+        //        }
+        //    }
+        //    return c;
+        //}
     }
 
 }
