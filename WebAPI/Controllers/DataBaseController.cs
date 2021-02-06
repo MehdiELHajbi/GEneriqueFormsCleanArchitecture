@@ -7,6 +7,7 @@ using Application.Features.DataBases.Queries;
 using Application.Features.DataBases.Queries.ExportGetListDataBeses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.FeatureManagement;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,8 +18,12 @@ namespace WebAPI.Controllers
     [ApiController]
     public class DataBaseController : ApiControllerBase
     {
+        public IFeatureManager FeatureManager { get; }
 
-
+        public DataBaseController(IFeatureManager featureManager)
+        {
+            FeatureManager = featureManager;
+        }
 
 
         [HttpGet("all", Name = "GetAllDatabases")]
@@ -73,6 +78,30 @@ namespace WebAPI.Controllers
             return response;
         }
 
+
+
+        [HttpGet("SecretPage", Name = "SecretPage")]
+        //[FeatureGate("SecretPage")]
+        public async Task<ActionResult<object>> SecretPage()
+        {
+            object response = new { };
+            if (await FeatureManager.IsEnabledAsync("SecretPage"))
+            {
+                response = new
+                { testValue = "YOYO" };
+
+            }
+            else
+            {
+                //Environment.SetEnvironmentVariable("FeatureManagement__SecretPage", "true", EnvironmentVariableTarget.Machine);
+
+                response = new
+                { testValue = "DADA" };
+            }
+
+
+            return await Task.FromResult(response);
+        }
     }
 }
 

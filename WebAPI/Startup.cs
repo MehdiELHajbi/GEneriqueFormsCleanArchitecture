@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.FeatureManagement;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using Serilog;
@@ -54,6 +55,7 @@ namespace WebAPI
 
             AddSwagger(services);
 
+            services.AddFeatureManagement();
             services.AddControllers();
             //.AddFluentValidation(s =>
             //{
