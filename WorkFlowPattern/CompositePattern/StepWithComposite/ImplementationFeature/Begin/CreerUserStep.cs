@@ -4,7 +4,7 @@
     {
         public CreerUserStep(string name) : base(name)
         {
-            add(new UserExiste("Verification de l existance de l'utlisateur"));
+            add(new UserExisteCondition("Verification de l existance de l'utlisateur"));
             add(new LogPerformanceProcess("log performance"));
             add(new LogInformationProcess("log information"));
 

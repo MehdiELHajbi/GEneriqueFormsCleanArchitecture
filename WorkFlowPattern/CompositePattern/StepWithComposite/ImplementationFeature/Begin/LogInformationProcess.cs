@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeature
+﻿namespace WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeature
 {
     public class LogInformationProcess : Process
     {
@@ -11,9 +9,9 @@ namespace WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeatu
 
         public override void operation()
         {
-            Console.WriteLine(" Avant Process : " + name);
+            //Console.WriteLine(" Avant Process : " + name);
             base.operation();
-            Console.WriteLine(" Apres Process : " + name);
+            //Console.WriteLine(" Apres Process : " + name);
 
         }
     }

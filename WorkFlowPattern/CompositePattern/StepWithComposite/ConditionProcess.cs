@@ -10,6 +10,8 @@ namespace WorkFlowPattern.CompositePattern.StepWithComposite
 
         public List<Process> ListProcessTrue;
         public List<Process> ListProcessFalse;
+
+
         public ConditionProcess(string name) : base(name)
         {
 
@@ -52,16 +54,25 @@ namespace WorkFlowPattern.CompositePattern.StepWithComposite
 
             return ConditionProcess;
         }
-        public static ConditionProcess AddStepTrue<T>(this ConditionProcess ConditionProcess, string nameStep)
+        public static ConditionProcess AddStepTrue(this ConditionProcess ConditionProcess, string nameStep)
         {
             ConditionProcess.True = new Step(nameStep);
 
             return ConditionProcess;
         }
 
-        public static ConditionProcess AddProcessTrue(this ConditionProcess ConditionProcess, string ProcessName)
+        public static ConditionProcess AddProcessTrue(this ConditionProcess ConditionProcess, Process process)
         {
-            ConditionProcess.ListProcessTrue.Add(new Process(ProcessName));
+            ConditionProcess.ListProcessTrue.Add(process);
+            return ConditionProcess;
+        }
+
+        public static ConditionProcess RemoveStepTrue(this ConditionProcess ConditionProcess)
+        {
+            ConditionProcess.remove(ConditionProcess.True);
+
+
+
             return ConditionProcess;
         }
 
@@ -73,9 +84,18 @@ namespace WorkFlowPattern.CompositePattern.StepWithComposite
 
             return ConditionProcess;
         }
-        public static ConditionProcess AddProcessFalse(this ConditionProcess ConditionProcess, string ProcessName)
+
+        public static ConditionProcess RemoveStepFalse(this ConditionProcess ConditionProcess)
         {
-            ConditionProcess.ListProcessFalse.Add(new Process(ProcessName));
+            ConditionProcess.remove(ConditionProcess.False);
+
+            return ConditionProcess;
+        }
+
+
+        public static ConditionProcess AddProcessFalse(this ConditionProcess ConditionProcess, Process process)
+        {
+            ConditionProcess.ListProcessFalse.Add(process);
 
             return ConditionProcess;
 

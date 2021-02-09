@@ -7,8 +7,8 @@
         {
             this.name = name;
         }
-        public string name;
-        public int niveau;
+        public string name { get; set; }
+        public int niveau { get; set; }
 
 
         public abstract void operation();

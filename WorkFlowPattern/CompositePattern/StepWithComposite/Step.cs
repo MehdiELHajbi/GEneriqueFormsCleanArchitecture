@@ -8,6 +8,7 @@ namespace WorkFlowPattern.CompositePattern.StepWithComposite
     public class Step : Algorithme
     {
 
+
         public Step(string name) : base(name)
         {
             Algorithmes = new List<Algorithme>();
@@ -35,13 +36,13 @@ namespace WorkFlowPattern.CompositePattern.StepWithComposite
 
         }
 
-        public void addList(List<Algorithme> algorithmes)
-        {
-            foreach (Algorithme a in algorithmes)
-            {
-                add(a);
-            }
-        }
+        //public void addList(List<Algorithme> algorithmes)
+        //{
+        //    foreach (Algorithme a in algorithmes)
+        //    {
+        //        add(a);
+        //    }
+        //}
 
         public void add(Algorithme c)
         {
