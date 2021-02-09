@@ -1,23 +1,31 @@
 ﻿namespace WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeature
 {
-    public class UserExiste : Step
+    public class UserExiste : ConditionProcess
     {
-        Step Way1;
-        Step Way2;
+
         public UserExiste(string name) : base(name)
         {
-            Way1 = new Step("si l'user n'existe pas ");
-            Way2 = new Step("si l'user existe deja ");
 
-            this.add(Way1);
-            this.add(Way2);
+            this.addCondition("Condition Process")
+
+                     .AddStepTrue("si l'user n'existe pas ")
+                                                            .AddProcessTrue("creer le user ")
+                                                            .AddProcessTrue("retourne succes ")
+                     .AddStepFalse("si l'user existe deja")
+                                                            .AddProcessFalse("Error ")
+                                                            .AddProcessFalse("retourne Faild ")
+                     .Build();
 
 
-            Way1.add(new Process("creer le user "));
-            Way1.add(new Process("retourne succes"));
+            //this.add(True);
+            //this.add(False);
 
-            Way2.add(new Process("Error "));
-            Way2.add(new Process("retourne Faild"));
+
+            //True.add(new Process("creer le user "));
+            //True.add(new Process("retourne succes"));
+
+            //False.add(new Process("Error "));
+            //False.add(new Process("retourne Faild"));
 
 
 
@@ -25,10 +33,9 @@
 
         public override void operation()
         {
-            //this.remove(Way2);
+            this.remove(True);
             base.operation();
-            //this.add(Way2);
-            base.operation();
+            //base.operation();
 
         }
     }

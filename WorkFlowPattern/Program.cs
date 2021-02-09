@@ -22,14 +22,14 @@ namespace WorkFlowPattern
             #region Test Composite 
 
             var composite = new TestComposite();
-            composite.run();
+            //composite.run();
 
             #endregion
 
             #region Test Step 
 
             var step = new TestStep();
-            step.run();
+            //step.run();
 
             #endregion
 

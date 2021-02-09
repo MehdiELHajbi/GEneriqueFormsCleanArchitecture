@@ -31,6 +31,16 @@ namespace WorkFlowPattern.CompositePattern.StepWithComposite
             {
                 a.operation();
             }
+
+
+        }
+
+        public void addList(List<Algorithme> algorithmes)
+        {
+            foreach (Algorithme a in algorithmes)
+            {
+                add(a);
+            }
         }
 
         public void add(Algorithme c)

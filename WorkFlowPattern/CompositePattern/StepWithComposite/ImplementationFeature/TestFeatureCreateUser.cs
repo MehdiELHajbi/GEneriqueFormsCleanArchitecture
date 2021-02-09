@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeature
+﻿namespace WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeature
 {
     public class TestFeatureCreateUser
     {
@@ -16,7 +14,7 @@ namespace WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeatu
             //racine.add(new Process("log performance"));
             //racine.add(new Process("log in json"));
 
-            var json = JsonConvert.SerializeObject(racine);
+            //var json = JsonConvert.SerializeObject(racine);
             racine.operation();
         }
     }
