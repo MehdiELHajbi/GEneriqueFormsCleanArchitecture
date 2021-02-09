@@ -1,6 +1,8 @@
 ﻿using Application.Contracts;
+using Application.Features.DataBases.Commands.Update.StepsRules;
 using AutoMapper;
 using MediatR;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,7 +20,18 @@ namespace Application.Features.DataBases.Commands.Update
             _mapper = mapper;
             _dataBaseRepository = dataBaseRepository;
         }
+
         public async Task<UpdateDataBesesCommandResponse> Handle(UpdateDataBesesCommand request, CancellationToken cancellationToken)
+        {
+            var flowchart = new UpdateDataBaseFlowsChart(request, _dataBaseRepository);
+            var result = flowchart.Evaluate(request);
+            // create response
+            var UpdateDataBesesCommandResponse = result.Result;
+            var required = result.RequiredFields.Select(f => f.PropertyName);
+
+            return UpdateDataBesesCommandResponse;
+        }
+        public async Task<UpdateDataBesesCommandResponse> HandleV1(UpdateDataBesesCommand request, CancellationToken cancellationToken)
         {
             // Validattion request With ValidatinBehaviour => automatique
 

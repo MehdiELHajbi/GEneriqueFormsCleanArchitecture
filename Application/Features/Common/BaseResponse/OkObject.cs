@@ -13,7 +13,7 @@ namespace Application.Features.Common.BaseResponse
             Message = message;
         }
 
-        public bool Success { get; set; }
+        public bool Success { get; }
         public string Message { get; set; }
         //public IDictionary<string, string[]> data { get; }
     }

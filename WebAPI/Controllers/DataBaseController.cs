@@ -75,6 +75,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<UpdateDataBesesCommandResponse>> Update([FromBody] UpdateDataBesesCommand updateEventCommand)
         {
             var response = await Mediator.Send(updateEventCommand);
+
             return response;
         }
 
