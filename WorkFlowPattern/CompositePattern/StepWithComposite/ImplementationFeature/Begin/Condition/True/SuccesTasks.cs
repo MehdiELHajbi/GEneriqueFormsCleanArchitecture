@@ -1,8 +1,8 @@
 ﻿namespace WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeature.Begin.Condition.True
 {
-    public class SuccesProcess : Process
+    public class SuccesTasks : Tasks
     {
-        public SuccesProcess(string name) : base(name)
+        public SuccesTasks(string name) : base(name)
         {
 
         }

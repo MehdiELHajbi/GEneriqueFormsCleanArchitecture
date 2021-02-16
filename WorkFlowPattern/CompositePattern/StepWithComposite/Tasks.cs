@@ -3,9 +3,9 @@ using WorkFlowPattern.CompositePattern.Step;
 
 namespace WorkFlowPattern.CompositePattern.StepWithComposite
 {
-    public class Process : Algorithme
+    public class Tasks : Algorithme
     {
-        public Process(string name) : base(name) { }
+        public Tasks(string name) : base(name) { }
 
         public override void operation()
         {
@@ -15,7 +15,7 @@ namespace WorkFlowPattern.CompositePattern.StepWithComposite
                 tab += "----";
             }
 
-            Console.WriteLine(tab + "  Process : " + name);
+            Console.WriteLine(tab + "  Tasks : " + name);
         }
     }
 }

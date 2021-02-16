@@ -1,8 +1,8 @@
 ﻿namespace WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeature
 {
-    public class LogInformationProcess : Process
+    public class LogInformationTask : Tasks
     {
-        public LogInformationProcess(string name) : base(name)
+        public LogInformationTask(string name) : base(name)
         {
 
         }

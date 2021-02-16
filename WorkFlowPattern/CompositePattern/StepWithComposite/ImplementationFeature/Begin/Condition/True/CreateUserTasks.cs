@@ -1,8 +1,8 @@
 ﻿namespace WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeature
 {
-    public class CreateUserProcess : Process
+    public class CreateUserTasks : Tasks
     {
-        public CreateUserProcess(string name) : base(name)
+        public CreateUserTasks(string name) : base(name)
         {
 
         }

@@ -4,7 +4,7 @@
     {
         public void run()
         {
-            Step racine = new CreerUserStep("Ceration d'utlisateur");
+            WorkFlow racine = new CreerUserStep("Ceration d'utlisateur");
             //Step composite2 = new Step("si l'user n'existe pas ");
 
             //racine.add(composite2);
@@ -16,6 +16,8 @@
 
             //var json = JsonConvert.SerializeObject(racine);
             racine.operation();
+
+
         }
     }
 }

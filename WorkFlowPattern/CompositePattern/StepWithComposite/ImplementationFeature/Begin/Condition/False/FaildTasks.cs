@@ -1,8 +1,8 @@
 ﻿namespace WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeature.Begin.Condition.False
 {
-    public class FaildProcess : Process
+    public class FaildTasks : Tasks
     {
-        public FaildProcess(string name) : base(name)
+        public FaildTasks(string name) : base(name)
         {
 
         }

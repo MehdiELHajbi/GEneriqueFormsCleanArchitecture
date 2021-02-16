@@ -6,6 +6,7 @@
         public Algorithme(string name)
         {
             this.name = name;
+
         }
         public string name { get; set; }
         public int niveau { get; set; }

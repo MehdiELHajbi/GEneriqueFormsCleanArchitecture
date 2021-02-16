@@ -5,11 +5,11 @@ using WorkFlowPattern.CompositePattern.Step;
 namespace WorkFlowPattern.CompositePattern.StepWithComposite
 {
 
-    public class Step : Algorithme
+    public class WorkFlow : Algorithme
     {
 
 
-        public Step(string name) : base(name)
+        public WorkFlow(string name) : base(name)
         {
             Algorithmes = new List<Algorithme>();
         }
@@ -25,7 +25,10 @@ namespace WorkFlowPattern.CompositePattern.StepWithComposite
             for (int i = 0; i < niveau; i++)
                 tab += "----";
 
-            Console.WriteLine(tab + " Step: " + name);
+            if (this is ConditionTasks)
+                Console.WriteLine(tab + " Condition WorkFlow: " + name);
+
+            Console.WriteLine(tab + " WorkFlow: " + name);
 
 
             foreach (Algorithme a in Algorithmes)
