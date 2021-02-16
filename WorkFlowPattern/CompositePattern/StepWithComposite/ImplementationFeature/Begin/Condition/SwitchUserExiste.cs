@@ -4,7 +4,7 @@ using WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeature.B
 namespace WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeature
 {
 
-    public class SwitchUserExiste : SwitchRules
+    public class SwitchUserExiste : Switch
     {
         public enum Decisions
         {
@@ -38,7 +38,7 @@ namespace WorkFlowPattern.CompositePattern.StepWithComposite.ImplementationFeatu
         #region Decision
         public Decisions UserExiste()
         {
-            return Decisions.User_Not_Existe;
+            return Decisions.User_Existe;
 
         }
         #endregion

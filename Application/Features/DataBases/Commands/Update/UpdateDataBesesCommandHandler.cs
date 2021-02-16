@@ -1,8 +1,8 @@
 ﻿using Application.Contracts;
-using Application.Features.DataBases.Commands.Update.StepsRules;
+using Application.Features.Common.Pattern.CompositeSwitch;
+using Application.Features.DataBases.Commands.Update.WorkFlows;
 using AutoMapper;
 using MediatR;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,11 +23,16 @@ namespace Application.Features.DataBases.Commands.Update
 
         public async Task<UpdateDataBesesCommandResponse> Handle(UpdateDataBesesCommand request, CancellationToken cancellationToken)
         {
-            var flowchart = new UpdateDataBaseFlowsChart(request, _dataBaseRepository);
-            var result = flowchart.Evaluate(request);
+
+            Algorithme racine = new WorkFlowUpdateDataBase("Update Data Base");
+            racine.context = new ContextUpdateDataBase(request, _dataBaseRepository);
+
+            racine.Execute();
+            var sdd = racine.context.Result;
+            //var ctx = new ContextUpdateDataBase(request, _dataBaseRepository);
             // create response
-            var UpdateDataBesesCommandResponse = result.Result;
-            var required = result.RequiredFields.Select(f => f.PropertyName);
+            //var UpdateDataBesesCommandResponse = result.Result;
+            //var required = result.RequiredFields.Select(f => f.PropertyName);
 
             return UpdateDataBesesCommandResponse;
         }

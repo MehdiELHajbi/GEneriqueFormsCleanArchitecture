@@ -1,4 +1,4 @@
-﻿namespace WorkFlowPattern.CompositePattern.Step
+﻿namespace Application.Features.Common.Pattern.CompositeSwitch
 {
     public abstract class Algorithme
     {
@@ -7,17 +7,14 @@
         {
             this.name = name;
 
+
         }
         public string name { get; set; }
         public int niveau { get; set; }
+        public abstract Context context { get; set; }
 
-        #region Trace
-        //public Stopwatch _timer;
 
-        //public long _elapsedMilliseconds;
-        #endregion
-
-        public abstract void operation();
+        public abstract void Execute();
 
 
     }
