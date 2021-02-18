@@ -6,12 +6,14 @@ namespace Application.Features.DataBases.Commands.Update.WorkFlows
 
     public class WorkFlowUpdateDataBase : WorkFlow
     {
-        public WorkFlowUpdateDataBase(string name) : base(name)
+        public WorkFlowUpdateDataBase(string name, ContextUpdateDataBase context) : base(name)
         {
 
-            add(new WorkFlowSwitchDataBaseExiste("Verification de l existance de l'utlisateur"));
+            add(new WorkFlowSwitchDataBaseExiste("Verification de l existance de l'utlisateur", context));
 
         }
+        //public ContextUpdateDataBase Ctx { get; }
+
     }
 
 }

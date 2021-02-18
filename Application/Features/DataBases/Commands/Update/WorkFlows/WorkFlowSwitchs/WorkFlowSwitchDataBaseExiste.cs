@@ -8,39 +8,43 @@ namespace Application.Features.DataBases.Commands.Update.WorkFlows.WorkFlowSwitc
 
     public class WorkFlowSwitchDataBaseExiste : WorkFlowSwitch
     {
-        public ContextUpdateDataBase Ctx { get; }
+        public ContextUpdateDataBase Context { get; }
+
+        //public ContextUpdateDataBase Ctx { get; set; }
 
         public enum Decisions
         {
-            DataBase_Existe,
-            DataBase_Not_Existe
+            Id_DataBase_Existe,
+            Id_DataBase_Not_Existe
         }
 
-        public WorkFlowSwitchDataBaseExiste(string name, ContextUpdateDataBase ctx) : base(name)
+        public WorkFlowSwitchDataBaseExiste(string name, ContextUpdateDataBase context) : base(name)
         {
+            Context = context;
 
-            this.Switch(DataBaseExiste())
-                                    .When(Decisions.DataBase_Existe)
-                                            .Do(UpdateDataBaseTasks("Update Data Base  "))
-                                            .Do(SuccesTasks("Return succes "))
-                                    .When(Decisions.DataBase_Not_Existe)
-                                            .Do(FaildTasks(" Return Error "))
-                .Build();
-            Ctx = ctx;
+            this.Switch(DataBaseExiste(context))
+                                 .When(Decisions.Id_DataBase_Existe)
+                                         .Do(WorkFlowSwitchNameDataBaseExiste("Data Base Name Existe ? ", context))
+                                 .When(Decisions.Id_DataBase_Not_Existe)
+                                         .Do(FaildTasks(" Return Error ", "Id dataBase n'existe pas"))
+                                 .Build();
         }
+
+
 
         #region Decision
-        public Decisions DataBaseExiste()
+        public Decisions DataBaseExiste(ContextUpdateDataBase context)
         {
 
 
-            var entity = Task.FromResult(this.context.dataBaseRepository.GetByIdAsync(Ctx.req.idDataBase)).Result;
-
+            var entity = Task.FromResult(context.dataBaseRepository.GetByIdAsync(context.req.idDataBase)).Result.Result;
             if (entity == null)
             {
-                return Decisions.DataBase_Not_Existe;
+                return Decisions.Id_DataBase_Not_Existe;
             }
-            return Decisions.DataBase_Existe;
+            Context.dataBases = entity;
+
+            return Decisions.Id_DataBase_Existe;
 
         }
         #endregion
@@ -48,9 +52,8 @@ namespace Application.Features.DataBases.Commands.Update.WorkFlows.WorkFlowSwitc
 
         #region Tasks/WorkFlow
 
-        private UpdateDataBaseTasks UpdateDataBaseTasks(string name) { return new UpdateDataBaseTasks(name); }
-        private SuccesTasks SuccesTasks(string name) { return new SuccesTasks(name); }
-        private FaildTasks FaildTasks(string name) { return new FaildTasks(name); }
+        private WorkFlowSwitchNameDataBaseExiste WorkFlowSwitchNameDataBaseExiste(string name, ContextUpdateDataBase context) { return new WorkFlowSwitchNameDataBaseExiste(name, context); }
+        private FaildTasks FaildTasks(string name, string msg) { return new FaildTasks(name, msg); }
 
         #endregion
     }

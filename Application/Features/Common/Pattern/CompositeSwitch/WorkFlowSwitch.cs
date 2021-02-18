@@ -2,15 +2,14 @@
 
 namespace Application.Features.Common.Pattern.CompositeSwitch
 {
+
     public class WorkFlowSwitch : WorkFlow
     {
-        public override Context context { get; set; }
         public string keyRule;
         private List<Algorithme> ListRules;
 
         public string Decision;
         public Dictionary<string, List<Algorithme>> Rules;
-
 
         public List<Algorithme> GetListeRules() { return ListRules; }
         public void SetListeRules() { ListRules = new List<Algorithme>(); }
@@ -21,7 +20,10 @@ namespace Application.Features.Common.Pattern.CompositeSwitch
             Rules = new Dictionary<string, List<Algorithme>>();
             SetListeRules();
         }
+
+
     }
+
 
 
     public static class SwitchExtension

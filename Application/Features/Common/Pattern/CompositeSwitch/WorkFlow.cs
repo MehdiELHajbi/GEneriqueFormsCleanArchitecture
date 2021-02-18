@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Application.Features.Common.Pattern.CompositeSwitch
 {
-    public class WorkFlow : Algorithme
+    public abstract class WorkFlow : Algorithme
     {
 
-        public override Context context { get; set; }
 
         public WorkFlow(string name) : base(name)
         {
@@ -18,20 +18,28 @@ namespace Application.Features.Common.Pattern.CompositeSwitch
 
 
 
-        public override void Execute()
+        public override async Task<Context> ExecuteAsyn(Context ctx)
         {
-
             string tab = "";
             for (int i = 0; i < niveau; i++)
                 tab += "----";
             Console.WriteLine(tab + " WorkFlow: " + name);
 
 
-            foreach (Algorithme a in Algorithmes)
+            foreach (Algorithme step in Algorithmes)
             {
-                a.Execute();
+
+                ctx = await step.ExecuteAsyn(ctx);
+
+
+
             }
+
+            return ctx;
+
+
         }
+
 
         public void add(Algorithme c)
         {

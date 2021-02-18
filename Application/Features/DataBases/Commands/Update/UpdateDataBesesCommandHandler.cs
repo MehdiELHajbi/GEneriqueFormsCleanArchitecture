@@ -1,5 +1,6 @@
 ﻿using Application.Contracts;
-using Application.Features.Common.Pattern.CompositeSwitch;
+using Application.Features.Common.BaseResponse;
+using Application.Features.DataBases.Commands.Update.Responses.OK;
 using Application.Features.DataBases.Commands.Update.WorkFlows;
 using AutoMapper;
 using MediatR;
@@ -10,7 +11,7 @@ namespace Application.Features.DataBases.Commands.Update
 {
 
 
-    public class UpdateDataBesesCommandHandler : IRequestHandler<UpdateDataBesesCommand, UpdateDataBesesCommandResponse>
+    public class UpdateDataBesesCommandHandler : IRequestHandler<UpdateDataBesesCommand, ResponseAbstract>
     {
         private readonly IDataBaseRepository _dataBaseRepository;
         private readonly IMapper _mapper;
@@ -21,20 +22,15 @@ namespace Application.Features.DataBases.Commands.Update
             _dataBaseRepository = dataBaseRepository;
         }
 
-        public async Task<UpdateDataBesesCommandResponse> Handle(UpdateDataBesesCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseAbstract> Handle(UpdateDataBesesCommand request, CancellationToken cancellationToken)
         {
+            var Contexts = new ContextUpdateDataBase(request, _dataBaseRepository);
+            var workFlow = new WorkFlowUpdateDataBase("Update Data Base", Contexts);
 
-            Algorithme racine = new WorkFlowUpdateDataBase("Update Data Base");
-            racine.context = new ContextUpdateDataBase(request, _dataBaseRepository);
 
-            racine.Execute();
-            var sdd = racine.context.Result;
-            //var ctx = new ContextUpdateDataBase(request, _dataBaseRepository);
-            // create response
-            //var UpdateDataBesesCommandResponse = result.Result;
-            //var required = result.RequiredFields.Select(f => f.PropertyName);
+            var response = await workFlow.ExecuteAsyn(Contexts);
 
-            return UpdateDataBesesCommandResponse;
+            return response.Result;
         }
         public async Task<UpdateDataBesesCommandResponse> HandleV1(UpdateDataBesesCommand request, CancellationToken cancellationToken)
         {
@@ -57,7 +53,7 @@ namespace Application.Features.DataBases.Commands.Update
             await _dataBaseRepository.UpdateAsync(entity);
 
             // create response
-            var UpdateDataBesesCommandResponse = new UpdateDataBesesCommandResponse();
+            var UpdateDataBesesCommandResponse = new UpdateDataBesesCommandResponse("update ok  ");
             UpdateDataBesesCommandResponse.Message = "update ok  ";
 
             return UpdateDataBesesCommandResponse;

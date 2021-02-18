@@ -1,7 +1,22 @@
-﻿namespace Application.Features.Common.Pattern.CompositeSwitch
+﻿using Application.Features.Common.BaseResponse;
+
+namespace Application.Features.Common.Pattern.CompositeSwitch
 {
-    public interface IContext
+    public abstract class Context
     {
-        public object Result { get; set; }
+        public ResponseAbstract Result { get; set; }
+        public bool Continue { get; set; } = true;
+
+
+        //public abstract WorkFlowSwitch<IContext> Switch(object decision);
+
+
+
+
+
+
+
+
+
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Application.Features.Common.Models;
 using Application.Features.DataBases.Commands.Create;
 using Application.Features.DataBases.Commands.Create.Responses.DocumentationAPI;
-using Application.Features.DataBases.Commands.Create.Responses.KO;
 using Application.Features.DataBases.Commands.Update;
+using Application.Features.DataBases.Commands.Update.Responses.DocumentationAPI;
 using Application.Features.DataBases.Queries;
 using Application.Features.DataBases.Queries.ExportGetListDataBeses;
 using Microsoft.AspNetCore.Http;
@@ -67,16 +67,16 @@ namespace WebAPI.Controllers
 
 
         [HttpPut(Name = "UpdatDataBase")]
-        [ProducesResponseType(typeof(ExceptionValidationResponse), StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(ExceptionDataBaseAlreadyExistsResponse), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(UpdateDataBesesCommandResponse), StatusCodes.Status200OK)]
+        //[ProducesResponseType(typeof(ExceptionValidationResponse), StatusCodes.Status204NoContent)]
+        //[ProducesResponseType(typeof(ExceptionDataBaseAlreadyExistsResponse), StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(typeof(UpdateDataBesesCommandResponse), StatusCodes.Status200OK)]
 
         //[ProducesDefaultResponseType]
-        public async Task<ActionResult<UpdateDataBesesCommandResponse>> Update([FromBody] UpdateDataBesesCommand updateEventCommand)
+        public async Task<ActionResult<OneOfUpdateDataBaseResponse>> Update([FromBody] UpdateDataBesesCommand updateEventCommand)
         {
             var response = await Mediator.Send(updateEventCommand);
 
-            return response;
+            return Ok(response);
         }
 
 

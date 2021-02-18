@@ -1,0 +1,18 @@
+﻿<#@ template hostspecific="true" language="C#" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="Generator.tt" #>
+<#
+    var parameters = new Dictionary<string, string>()
+    {
+        { "Namespace", "T4GenericsExample" },
+        { "ClassName", GetTemplateName() },
+        { "TypeParameter", "int" } 
+    };
+ 
+    Generate("GenericClass.tt", parameters);
+    
+SaveFile("D:\\Logs", "YO" + ".cs", this.GenerationEnvironment.ToString());
+this.GenerationEnvironment.Remove(0, this.GenerationEnvironment.Length); 
+
+#>

@@ -1,4 +1,6 @@
-﻿namespace Application.Features.Common.Pattern.CompositeSwitch
+﻿using System.Threading.Tasks;
+
+namespace Application.Features.Common.Pattern.CompositeSwitch
 {
     public abstract class Algorithme
     {
@@ -11,10 +13,10 @@
         }
         public string name { get; set; }
         public int niveau { get; set; }
-        public abstract Context context { get; set; }
 
 
-        public abstract void Execute();
+        public abstract Task<Context> ExecuteAsyn(Context ctx);
+        //public abstract void Execute();
 
 
     }
