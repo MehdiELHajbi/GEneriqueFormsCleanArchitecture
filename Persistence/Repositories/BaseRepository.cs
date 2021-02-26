@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.Repositories
 {
-    public class BaseRepository<T> : IAsyncRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         protected readonly ApplicationDbContext _dbContext;
         protected readonly DbSet<T> _dbSet;

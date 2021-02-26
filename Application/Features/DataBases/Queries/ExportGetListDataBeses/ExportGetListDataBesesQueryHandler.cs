@@ -12,10 +12,10 @@ namespace Application.Features.DataBases.Queries.ExportGetListDataBeses
 {
     public class ExportGetListDataBesesQueryHandler : IRequestHandler<ExportGetListDataBesesQuery, ExportGetListDataBesesVM>
     {
-        private readonly IAsyncRepository<DataBase> _dataBaseRepository;
+        private readonly IBaseRepository<DataBase> _dataBaseRepository;
         private readonly IMapper _mapper;
         private readonly ICsvExporter _csvExporter;
-        public ExportGetListDataBesesQueryHandler(IMapper mapper, IAsyncRepository<DataBase> dataBaseRepository, ICsvExporter csvExporter)
+        public ExportGetListDataBesesQueryHandler(IMapper mapper, IBaseRepository<DataBase> dataBaseRepository, ICsvExporter csvExporter)
         {
             _mapper = mapper;
             _dataBaseRepository = dataBaseRepository;

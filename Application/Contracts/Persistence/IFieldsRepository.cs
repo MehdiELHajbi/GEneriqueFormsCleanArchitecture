@@ -2,7 +2,7 @@
 
 namespace Application.Contracts
 {
-    public interface IFieldsRepository : IAsyncRepository<Fields>
+    public interface IFieldsRepository : IBaseRepository<Fields>
     {
     }
 }

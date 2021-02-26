@@ -11,10 +11,10 @@ namespace Application.Features.DataBases.Queries
 {
     class GetListDataBesesWithPaginationQueryHandler : IRequestHandler<GetListDataBesesWithPaginationQuery, PaginatedList<ListDataBasesDTO>>
     {
-        private readonly IAsyncRepository<DataBase> _dataBaseRepository;
+        private readonly IBaseRepository<DataBase> _dataBaseRepository;
         private readonly IMapper _mapper;
 
-        public GetListDataBesesWithPaginationQueryHandler(IMapper mapper, IAsyncRepository<DataBase> dataBaseRepository)
+        public GetListDataBesesWithPaginationQueryHandler(IMapper mapper, IBaseRepository<DataBase> dataBaseRepository)
         {
             _mapper = mapper;
             _dataBaseRepository = dataBaseRepository;

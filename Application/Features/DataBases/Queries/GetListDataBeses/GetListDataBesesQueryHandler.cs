@@ -10,10 +10,10 @@ namespace Application.Features.DataBases.Queries
 {
     class GetListDataBesesQueryHandler : IRequestHandler<GetListDataBesesQuery, List<ListDataBasesVM>>
     {
-        private readonly IAsyncRepository<DataBase> _dataBaseRepository;
+        private readonly IBaseRepository<DataBase> _dataBaseRepository;
         private readonly IMapper _mapper;
 
-        public GetListDataBesesQueryHandler(IMapper mapper, IAsyncRepository<DataBase> dataBaseRepository)
+        public GetListDataBesesQueryHandler(IMapper mapper, IBaseRepository<DataBase> dataBaseRepository)
         {
             _mapper = mapper;
             _dataBaseRepository = dataBaseRepository;

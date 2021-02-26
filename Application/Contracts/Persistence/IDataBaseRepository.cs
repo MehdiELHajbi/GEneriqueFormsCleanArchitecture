@@ -2,7 +2,7 @@
 
 namespace Application.Contracts
 {
-    public interface IDataBaseRepository : IAsyncRepository<DataBase>
+    public interface IDataBaseRepository : IBaseRepository<DataBase>
     {
 
     }

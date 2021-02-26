@@ -2,7 +2,7 @@
 
 namespace Application.Contracts
 {
-    public interface ITablesRepository : IAsyncRepository<Tables>
+    public interface ITablesRepository : IBaseRepository<Tables>
     {
     }
 }

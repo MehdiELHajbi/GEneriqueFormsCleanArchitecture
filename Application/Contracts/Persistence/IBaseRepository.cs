@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Application.Contracts
 {
     //https://blog.dcube.fr/index.php/2019/09/05/generic-repository-unit-of-work-et-entity-framework/
-    public interface IAsyncRepository<T> where T : class
+    public interface IBaseRepository<T> where T : class
     {
         #region CREATE
         Task<T> AddAsync(T entity);
